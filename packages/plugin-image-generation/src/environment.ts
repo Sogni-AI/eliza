@@ -10,10 +10,14 @@ export const imageGenEnvSchema = z
         FAL_API_KEY: z.string().optional(),
         OPENAI_API_KEY: z.string().optional(),
         VENICE_API_KEY: z.string().optional(),
+        SOGNI_APP_ID: z.string().optional(),
+        SOGNI_USERNAME: z.string().optional(),
+        SOGNI_PASSWORD: z.string().optional(),
     })
     .refine(
         (data) => {
             return !!(
+                data.SOGNI_APP_ID ||
                 data.ANTHROPIC_API_KEY ||
                 data.NINETEEN_AI_API_KEY ||
                 data.TOGETHER_API_KEY ||
@@ -57,6 +61,14 @@ export async function validateImageGenConfig(
             VENICE_API_KEY:
                 runtime.getSetting("VENICE_API_KEY") ||
                 process.env.VENICE_API_KEY,
+            SOGNI_APP_ID:
+                runtime.getSetting("SOGNI_APP_ID") || process.env.SOGNI_APP_ID,
+            SOGNI_USERNAME:
+                runtime.getSetting("SOGNI_USERNAME") ||
+                process.env.SOGNI_USERNAME,
+            SOGNI_PASSWORD:
+                runtime.getSetting("SOGNI_PASSWORD") ||
+                process.env.SOGNI_PASSWORD,
         };
 
         return imageGenEnvSchema.parse(config);

@@ -20,6 +20,7 @@
     ],
     "dependencies": {
         "@elizaos/core": "workspace:*",
+        "@sogni-ai/sogni-client": "^0.4.3",
         "tsup": "8.3.5"
     },
     "scripts": {
